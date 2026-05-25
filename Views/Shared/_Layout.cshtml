@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Barba Negra</title>
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <style>
+        .sidebar-nav a svg {
+            margin-right: 12px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .logo-svg {
+            width: 42px;
+            height: 42px;
+            margin-right: 10px;
+        }
+
+        /* Ajuste automático: se não for admin, o conteúdo ocupa a tela toda */
+        .content-full {
+            margin-left: 0 !important;
+            width: 100% !important;
+        }
+
+        .header-full {
+            left: 0 !important;
+            width: 100% !important;
+            background-color: #1a1a1a !important;
+        }
+    </style>
+</head>
+<body>
+    @{
+        // CORREÇÃO: "Admin" com 'A' maiúsculo para funcionar com a sua Claim de Login
+        bool isAdmin = User?.Identity?.IsAuthenticated == true && User?.IsInRole("admin") == true;
+    }
+
+    @if (isAdmin)
+    {
+        <aside class="sidebar">
+            <div class="logo">
+                <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="#cd7f32" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 11c0 3.866 2.239 7 5 7s5-3.134 5-7" />
+                    <path d="M8 8a4 4 0 1 1 8 0" />
+                    <path d="M9 14s1-1 3-1 3 1 3 1" />
+                    <path d="M4 20L8 16M20 20l-4-4" />
+                    <circle cx="5" cy="21" r="1.5" />
+                    <circle cx="19" cy="21" r="1.5" />
+                </svg>
+                <span class="logo-text">Barba Negra</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="active"><i class="fas fa-home" style="margin-right:10px;"></i> Dashboard</a>
+                <a href="#"><i class="fas fa-calendar-alt" style="margin-right:10px;"></i> Agendamentos</a>
+                <a href="#"><i class="fas fa-users" style="margin-right:10px;"></i> Clientes</a>
+                <a href="#"><i class="fas fa-cut" style="margin-right:10px;"></i> Serviços</a>
+                <a href="#"><i class="fas fa-user-tie" style="margin-right:10px;"></i> Profissionais</a>
+                <a href="#"><i class="fas fa-dollar-sign" style="margin-right:10px;"></i> Financeiro</a>
+                <a href="#"><i class="fas fa-cog" style="margin-right:10px;"></i> Configurações</a>
+            </nav>
+        </aside>
+    }
+
+    <div class="main-wrapper @(!isAdmin ? "content-full" : "")">
+        <header class="top-header @(!isAdmin ? "header-full" : "")">
+
+            @if (!isAdmin)
+            {
+                <div class="header-logo" style="display: flex; align-items: center; gap: 10px;">
+                    <svg class="logo-svg" style="width: 35px; height: 35px;" viewBox="0 0 24 24" fill="none" stroke="#cd7f32" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 11c0 3.866 2.239 7 5 7s5-3.134 5-7" />
+                        <path d="M8 8a4 4 0 1 1 8 0" />
+                        <path d="M9 14s1-1 3-1 3 1 3 1" />
+                        <path d="M4 20L8 16M20 20l-4-4" />
+                        <circle cx="5" cy="21" r="1.5" />
+                        <circle cx="19" cy="21" r="1.5" />
+                    </svg>
+                    <span style="color: white; font-weight: bold; font-size: 1.2rem;">Barba Negra<br><small style="font-size: 0.7rem; color: #aaa; font-weight: normal;">Gestão de Barbearia</small></span>
+                </div>
+            }
+            else
+            {
+                <div class="mobile-logo mobile-only">
+                    <span class="logo-text">BN</span>
+                </div>
+
+                <div class="search-bar">
+                    <i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #777;"></i>
+                    <input type="text" placeholder="Buscar agendamento ou cliente...">
+                </div>
+            }
+
+            <nav class="top-nav" style="display: flex; gap: 1.5rem; align-items: center; margin-left: auto;">
+
+                @if (User?.Identity?.IsAuthenticated == true)
+                {
+                    <div style="display: flex; align-items: center; gap: 12px;">
+
+                        <div style="text-align: right; line-height: 1.2;">
+                            <div style="color: black; font-weight: bold; font-size: 1.05rem;">
+                                Olá @User.Identity.Name.ToUpperInvariant()
+                            </div>
+                            <div style="color: white; font-size: 0.85rem;">
+                                
+                            </div>
+                        </div>
+
+                        <img src="https://ui-avatars.com/api/?name=@User.Identity.Name&background=cd7f32&color=fff&size=100"
+                             style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover;"
+                             alt="Foto de Perfil">
+
+                        <a asp-controller="Auth" asp-action="Sair" style="color: #ff4d4d; margin-left: 15px; font-weight: bold; text-decoration: none; cursor: pointer;">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <a asp-controller="Home" asp-action="Index" style="color: #ccc; font-weight: 500; text-decoration: none;">Início</a>
+                    <a asp-controller="Home" asp-action="Precos" style="color: #ccc; font-weight: 500; text-decoration: none;">Preços</a>
+                    <a asp-controller="Home" asp-action="Sobre" style="color: #ccc; font-weight: 500; text-decoration: none;">Sobre Nós</a>
+                    <a asp-controller="Home" asp-action="Contato" style="color: #ccc; font-weight: 500; text-decoration: none;">Contato</a>
+                    <a asp-controller="Auth" asp-action="Login" style="background-color: #cd7f32; color: white; padding: 10px 24px; border-radius: 4px; font-weight: bold; text-decoration: none; margin-left: 15px;">Login</a>
+                }
+            </nav>
+        </header>
+
+        <main class="content" style="@(!isAdmin ? "padding: 0; margin-top: 70px;" : "")">
+            @RenderBody()
+        </main>
+    </div>
+
+    @if (isAdmin)
+    {
+        <nav class="bottom-nav mobile-only">
+            <a href="#" class="active"><i class="fas fa-home"></i> Início</a>
+            <a href="#"><i class="fas fa-calendar-alt"></i> Agenda</a>
+            <a href="#"><i class="fas fa-users"></i> Clientes</a>
+            <a href="#"><i class="fas fa-bars"></i> Menu</a>
+        </nav>
+    }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

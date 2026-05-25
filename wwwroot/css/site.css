@@ -1,0 +1,439 @@
+﻿/* --- ESTILOS GLOBAIS --- */
+:root {
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --text-dark: #333333;
+    --text-grey: #777777;
+    /* Cores do Projeto (Barba Negra) */
+    --color-charcoal: #2c2f33;
+    --color-charcoal-dark: #1e2124;
+    --color-bronze: #cd7f32;
+    --color-bronze-dark: #a66528;
+    --color-green: #2ecc71;
+    --color-yellow: #f1c40f;
+    --shadow-light: 0 2px 5px rgba(0,0,0,0.05);
+    --radius-md: 8px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    display: flex;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+img {
+    max-width: 100%;
+}
+
+.mobile-only {
+    display: block;
+}
+
+.desktop-only {
+    display: none;
+}
+
+/* --- HEADER SUPERIOR --- */
+.top-header {
+    background-color: var(--bg-white);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.mobile-logo {
+    display: flex;
+    align-items: center;
+    color: var(--color-bronze);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.logo-icon {
+    font-size: 1.4rem;
+    margin-right: 0.5rem;
+}
+
+.search-bar {
+    flex: 1;
+    max-width: 400px;
+    position: relative;
+    margin: 0 1rem;
+}
+
+    .search-bar i {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-grey);
+    }
+
+    .search-bar input {
+        width: 100%;
+        padding: 8px 10px 8px 35px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        background-color: var(--bg-light);
+    }
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-name {
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    color: var(--text-grey);
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* --- CONTEÚDO PRINCIPAL --- */
+.main-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    padding: 1.5rem;
+    padding-bottom: 80px;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-charcoal);
+}
+
+/* --- KPI GRID --- */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.kpi-card {
+    background-color: var(--bg-white);
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-light);
+    display: flex;
+    align-items: center;
+}
+
+.kpi-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    margin-right: 1rem;
+}
+
+    .kpi-icon.bronze {
+        background-color: var(--color-bronze);
+    }
+
+    .kpi-icon i {
+        color: white;
+    }
+
+.kpi-card.green {
+    border-left: 4px solid var(--color-green);
+}
+
+    .kpi-card.green .kpi-icon {
+        background-color: var(--color-green);
+    }
+
+.kpi-info h3 {
+    font-size: 0.9rem;
+    color: var(--text-grey);
+    font-weight: normal;
+}
+
+.kpi-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--color-charcoal);
+}
+
+/* --- AGENDAMENTOS SECTION --- */
+.appointments h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--color-charcoal);
+}
+
+.appointment-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.appointment-card {
+    background-color: var(--bg-white);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-light);
+    display: grid;
+    grid-template-columns: 60px 1fr 100px;
+    align-items: center;
+}
+
+    .appointment-card .time {
+        font-weight: bold;
+        font-size: 1.1rem;
+        color: var(--color-bronze);
+    }
+
+    .appointment-card .details p {
+        font-size: 0.9rem;
+        margin-bottom: 2px;
+    }
+
+    .appointment-card .client {
+        display: flex;
+        align-items: center;
+        color: var(--text-grey);
+    }
+
+        .appointment-card .client img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+
+    .appointment-card .barber {
+        color: var(--text-grey);
+        font-size: 0.8rem !important;
+    }
+
+.status-badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+}
+
+    .status-badge.confirmed {
+        background-color: rgba(46, 204, 113, 0.15);
+        color: var(--color-green);
+    }
+
+    .status-badge.pending {
+        background-color: rgba(241, 196, 15, 0.15);
+        color: var(--color-yellow);
+    }
+
+/* --- BOTTOM NAV (MOBILE) --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-charcoal);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+    .bottom-nav a {
+        color: #a0a0a0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 0.75rem;
+    }
+
+        .bottom-nav a i {
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+
+        .bottom-nav a.active {
+            color: var(--color-bronze);
+        }
+
+.sidebar {
+    display: none;
+}
+
+/* =========================================
+   --- MEDIA QUERY (DESKTOP) ---
+========================================= */
+@media (min-width: 768px) {
+    .mobile-only {
+        display: none !important;
+    }
+
+    .desktop-only {
+        display: block;
+    }
+
+    body {
+        flex-direction: row;
+    }
+
+    .content {
+        padding: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        width: 250px;
+        background-color: var(--color-charcoal);
+        color: #ecf0f1;
+        min-height: 100vh;
+        position: sticky;
+        top: 0;
+        padding: 1.5rem;
+    }
+
+        .sidebar .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .sidebar .logo-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: var(--radius-md);
+            color: #bdc3c7;
+            font-size: 0.95rem;
+        }
+
+            .sidebar-nav a i {
+                margin-right: 12px;
+                width: 20px;
+                text-align: center;
+            }
+
+            .sidebar-nav a:hover {
+                background-color: var(--color-charcoal-dark);
+                color: white;
+            }
+
+            .sidebar-nav a.active {
+                background-color: rgba(205, 127, 50, 0.15);
+                color: var(--color-bronze);
+                font-weight: bold;
+            }
+
+    .top-header {
+        padding: 1rem 2rem;
+    }
+
+    .kpi-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .table-container {
+        background-color: var(--bg-white);
+        padding: 1rem;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-light);
+    }
+
+    .appointments-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        text-align: left;
+    }
+
+        .appointments-table thead th {
+            padding: 12px 15px;
+            color: var(--text-grey);
+            font-weight: normal;
+            border-bottom: 1px solid #eee;
+        }
+
+        .appointments-table tbody td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            color: var(--text-dark);
+        }
+
+    .client-cell {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+        .client-cell img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+    .status {
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+        .status.confirmed {
+            background-color: rgba(46, 204, 113, 0.15);
+            color: var(--color-green);
+        }
+
+        .status.pending {
+            background-color: rgba(241, 196, 15, 0.15);
+            color: var(--color-yellow);
+        }
+}
