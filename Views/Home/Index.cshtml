@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Início";
     // MESMA SIMULAÇÃO AQUI
-    bool isAdmin = false;
+    bool isAdmin = User?.Identity?.IsAuthenticated == true && User?.IsInRole("admin") == true;
 }
 
 @if (!isAdmin)

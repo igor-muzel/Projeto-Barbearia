@@ -102,9 +102,20 @@
                     <div style="display: flex; align-items: center; gap: 12px;">
 
                         <div style="text-align: right; line-height: 1.2;">
-                            <div style="color: black; font-weight: bold; font-size: 1.05rem;">
-                                Olá @User.Identity.Name.ToUpperInvariant()
-                            </div>
+
+                            @if (User.IsInRole("admin") == true)
+                            {
+                                <div style="color: black; font-weight: bold; font-size: 1.05rem;">
+                                    Olá @User.Identity.Name.ToUpperInvariant()
+                                </div>
+                            }
+                            else
+                            {
+                                <div style="color: white; font-weight: bold; font-size: 1.05rem;">
+                                    Olá @User.Identity.Name.ToUpperInvariant()
+                                </div>
+                            }
+                            
                             <div style="color: white; font-size: 0.85rem;">
                                 
                             </div>
