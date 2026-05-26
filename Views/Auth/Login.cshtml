@@ -2,6 +2,12 @@
     ViewData["Title"] = "Login";
 }
 
+<style>
+    .omitir {
+        display: none;
+    }
+ </style>
+
 <div style="display: flex; justify-content: center; align-items: center; min-height: 70vh; padding: 1rem;">
     <div style="background-color: var(--bg-white); padding: 2.5rem; border-radius: var(--radius-md); box-shadow: var(--shadow-light); width: 100%; max-width: 400px;">
 
@@ -70,8 +76,11 @@
                 });
 
                 if(resposta.ok){
+                    
                     alert("Login realizado com sucesso: "+dadosLogin.email);
                     window.location.href = '/Home/Index';
+                    
+                    
                     
 
                 }else if(resposta.status === 401){
@@ -80,7 +89,7 @@
 
             }catch (erro) {
                 console.error('Erro ao realizar o login:', erro);
-                alert("Erro ao conectar com o servidor.");
+                alert("Erro ao conectar com o servidor."+erro);
             
             }
 

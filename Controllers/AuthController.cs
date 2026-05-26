@@ -47,7 +47,7 @@ namespace ProjectBarber.Controllers
                 return Unauthorized(new { mensagem = "Senha inválida." });
             }
 
-            //monbta o cracha do usuario para identificar ele e realizar a autenticação, o cracha é composto por uma lista de claims,
+            //monta o cracha do usuario para identificar ele e realizar a autenticação, o cracha é composto por uma lista de claims,
             //que são informações sobre o usuário
             var claims = new List<Claim>
             {

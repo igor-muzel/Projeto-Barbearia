@@ -54,3 +54,4 @@ C:\ProjectBarber\ProjectBarber\obj\Debug\net8.0\refint\ProjectBarber.dll
 C:\ProjectBarber\ProjectBarber\obj\Debug\net8.0\ProjectBarber.pdb
 C:\ProjectBarber\ProjectBarber\obj\Debug\net8.0\ProjectBarber.genruntimeconfig.cache
 C:\ProjectBarber\ProjectBarber\obj\Debug\net8.0\ref\ProjectBarber.dll
+C:\ProjectBarber\ProjectBarber\obj\Debug\net8.0\ProjectBarber.sourcelink.json

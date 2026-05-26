@@ -7,88 +7,97 @@
 @if (!isAdmin)
 {
     /* =======================================================
-       VISÃO DO CLIENTE / VISITANTE (LANDING PAGE)
-       ======================================================= */
-    <style>
-        .hero-section {
-            /* Adicione o link de uma imagem de barbearia na URL abaixo */
-            background-image: linear-gradient(rgba(17, 17, 17, 0.8), rgba(17, 17, 17, 0.9)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            height: calc(100vh - 70px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 2rem;
+    VISÃO DO CLIENTE / VISITANTE (LANDING PAGE)
+                   ======================================================= */
+<style>
+    .hero-section {
+    /* Adicione o link de uma imagem de barbearia na URL abaixo */
+    background-image: linear-gradient(rgba(17, 17, 17, 0.8), rgba(17, 17, 17, 0.9)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+    }
+
+
+
+    .hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    max-width: 900px;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+    }
+
+    .hero-subtitle {
+    font-size: 1.2rem;
+    color: #cccccc;
+    max-width: 700px;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    }
+
+    .btn-primary-large {
+    background-color: #cd7f32; /* Cor Bronze */
+    color: white;
+    padding: 18px 36px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 3rem;
+    }
+
+    .btn-primary-large:hover {
+    background-color: #b06a28;
+    color: white;
+    }
+
+    .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+    }
+
+    .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #dddddd;
+    letter-spacing: 1px;
+    }
+
+    .feature-icon {
+    color: #cd7f32;
+    font-size: 1.5rem;
+    }
+
+
+</style>
+
+<div class="hero-section">
+    <h1 class="hero-title">O SISTEMA QUE SUA BARBEARIA MERECE</h1>
+    <p class="hero-subtitle">Controle agendamentos, finanças, clientes e profissionais em um só lugar com Barba Negra. Modernize sua gestão hoje.</p>
+
+
+    @if (!User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Auth" asp-action="Cadastrar" class="btn-primary-large">CADASTRE-SE</a>
         }
-
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            max-width: 900px;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-            text-transform: uppercase;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: #cccccc;
-            max-width: 700px;
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-        }
-
-        .btn-primary-large {
-            background-color: #cd7f32; /* Cor Bronze */
-            color: white;
-            padding: 18px 36px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 3rem;
-        }
-
-            .btn-primary-large:hover {
-                background-color: #b06a28;
-                color: white;
-            }
-
-        .features-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            align-items: flex-start;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #dddddd;
-            letter-spacing: 1px;
-        }
-
-        .feature-icon {
-            color: #cd7f32;
-            font-size: 1.5rem;
-        }
-    </style>
-
-    <div class="hero-section">
-        <h1 class="hero-title">O SISTEMA QUE SUA BARBEARIA MERECE</h1>
-        <p class="hero-subtitle">Controle agendamentos, finanças, clientes e profissionais em um só lugar com Barba Negra. Modernize sua gestão hoje.</p>
-
-        <a asp-controller="Auth" asp-action="Cadastrar" class="btn-primary-large">CADASTRE-SE</a>
+        
 
         <div class="features-list">
             <div class="feature-item">
