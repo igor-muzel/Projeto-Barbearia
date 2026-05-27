@@ -1,0 +1,141 @@
+﻿@model IEnumerable<ProjectBarber.Models.Usuario>
+@{
+    ViewData["Title"] = "Clientes";
+    bool isAdmin = User?.Identity?.IsAuthenticated == true && User?.IsInRole("admin") == true;
+}
+
+<style>
+    .clientes-container {
+        padding: 2rem 1rem;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        border-bottom: 2px solid #cd7f32; 
+        padding-bottom: 1rem;
+    }
+
+    .page-title {
+        color: #333; 
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .table-card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+    }
+
+        .custom-table thead {
+            background-color: #111111; 
+            color: #cd7f32; 
+        }
+
+        .custom-table th {
+            padding: 1.2rem 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+        }
+
+        .custom-table td {
+            padding: 1rem 1.5rem;
+            color: #444;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+
+        .custom-table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+            .custom-table tbody tr:hover {
+                background-color: #fcf8f2; 
+            }
+
+            .custom-table tbody tr:last-child td {
+                border-bottom: none;
+            }
+
+    .icon-text {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #888;
+    }
+</style>
+
+@if (isAdmin)
+{
+    <div class="clientes-container">
+        <div class="page-header">
+            <h2 class="page-title">
+                <i class="fas fa-users" style="color: #cd7f32; margin-right: 10px;"></i>
+                Gestão de Clientes
+            </h2>
+        </div>
+
+        <div class="table-card">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Nome do Cliente</th>
+                        <th>Contato (E-mail)</th>
+                        <th>Telefone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var cliente in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="icon-text">
+                                        <i class="far fa-user-circle" style="color: #a0aec0; font-size: 1.3rem;"></i>
+                                        <span style="font-weight: 500; color: #222;">@cliente.Nome</span>
+                                    </div>
+                                </td>
+                                <td>@cliente.Email</td>
+                                <td>@cliente.Telefone</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3">
+                                <div class="empty-state">
+                                    <i class="fas fa-inbox" style="font-size: 2.5rem; color: #ddd; margin-bottom: 1rem; display: block;"></i>
+                                    <p style="margin: 0; font-size: 1.1rem;">Nenhum cliente comum cadastrado no sistema ainda.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

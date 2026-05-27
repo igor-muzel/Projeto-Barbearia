@@ -57,7 +57,7 @@
             <nav class="sidebar-nav">
                 <a href="#" class="active"><i class="fas fa-home" style="margin-right:10px;"></i> Dashboard</a>
                 <a href="#"><i class="fas fa-calendar-alt" style="margin-right:10px;"></i> Agendamentos</a>
-                <a href="#"><i class="fas fa-users" style="margin-right:10px;"></i> Clientes</a>
+                <a asp-controller="Cliente" asp-action="Exibir"><i class="fas fa-users" style="margin-right:10px;"></i> Clientes</a>
                 <a href="#"><i class="fas fa-cut" style="margin-right:10px;"></i> Serviços</a>
                 <a href="#"><i class="fas fa-user-tie" style="margin-right:10px;"></i> Profissionais</a>
                 <a href="#"><i class="fas fa-dollar-sign" style="margin-right:10px;"></i> Financeiro</a>
@@ -160,3 +160,6 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+    

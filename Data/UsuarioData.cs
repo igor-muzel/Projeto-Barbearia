@@ -11,36 +11,41 @@ namespace ProjectBarber.Data
         //método construtor serve para inicializar um objeto no qual vai servir 
         //para receber a string de conexão do banco de dados      
         public UsuarioData(string connectionString)
-        { 
-            _connectionString = connectionString;           
+        {
+            _connectionString = connectionString;
         }
 
         public void CadastrarUsuario(Usuario usuario)
         {
-            using (var conexao = new MySqlConnection(_connectionString))
-            { 
-                conexao.Open();
-
-                string query = "INSERT INTO Usuarios (Nome, Email, Telefone, Senha) VALUES (@Nome, @Email, @Telefone, @Senha)";
-
-                using (var comando = new MySqlCommand(query, conexao))
+            try {
+                using (var conexao = new MySqlConnection(_connectionString))
                 {
-                    comando.Parameters.AddWithValue("@Nome", usuario.Nome);
-                    comando.Parameters.AddWithValue("@Email", usuario.Email);
-                    comando.Parameters.AddWithValue("@Telefone", usuario.Telefone);
+                    conexao.Open();
 
-                    string senhaCriptografada = BCrypt.Net.BCrypt.HashPassword(usuario.Senha);
+                    string query = "INSERT INTO Usuarios (Nome, Email, Telefone, Senha) VALUES (@Nome, @Email, @Telefone, @Senha)";
 
-                    comando.Parameters.AddWithValue("@Senha", senhaCriptografada);
+                    using (var comando = new MySqlCommand(query, conexao))
+                    {
+                        comando.Parameters.AddWithValue("@Nome", usuario.Nome);
+                        comando.Parameters.AddWithValue("@Email", usuario.Email);
+                        comando.Parameters.AddWithValue("@Telefone", usuario.Telefone);
 
-                    comando.ExecuteNonQuery();              
+                        string senhaCriptografada = BCrypt.Net.BCrypt.HashPassword(usuario.Senha);
+
+                        comando.Parameters.AddWithValue("@Senha", senhaCriptografada);
+
+                        comando.ExecuteNonQuery();
+                    }
+
+
                 }
-
-            
             }
+            
 
 
-        
+
+
+
         }
 
 
@@ -69,16 +74,45 @@ namespace ProjectBarber.Data
                                 Senha = leitor["Senha"].ToString(),  //hash da senha criptografada
                                 Role = leitor["Role"].ToString() //adiciona a role do usuário
                             };
-                           
+
 
                         }
-                    }               
+                    }
 
-                }           
+                }
 
             }
 
             return null; //retorna null se o usuário não for encontrado 
+        }
+
+
+        public List<Usuario> ListarUsuarios()
+        {
+            var usuarios = new List<Usuario>();
+            using (var conexao = new MySqlConnection(_connectionString))
+            {
+                conexao.Open();
+                string query = "SELECT Id, Nome, Email, Telefone, role FROM usuarios";
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    using (var leitor = comando.ExecuteReader())
+                    {
+                        while (leitor.Read())
+                        {
+                            usuarios.Add(new Usuario
+                            {
+                                Id = Convert.ToInt32(leitor["Id"]),
+                                Nome = leitor["Nome"].ToString(),
+                                Email = leitor["Email"].ToString(),
+                                Telefone = leitor["Telefone"].ToString(),
+                                Role = leitor["role"].ToString()    
+                            });
+                        }
+                    }
+                }
+            }
+            return usuarios;
         }
     }
 }
